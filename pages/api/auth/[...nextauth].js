@@ -28,7 +28,10 @@ const options = {
       from: "manuel.nenninger@web.de",
     }),
   ],
-  database: "mongodb://localhost:27017/nextauthfortodolist"
+  pages: {
+    signIn: '/auth/signIn',
+  },
+  database: "mongodb://localhost:27017/nextauthfortodolist",
 }
 export default (req, res) => NextAuth(req, res, options);
 

@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { signIn, signOut, useSession } from "next-auth/client"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparent',
     boxShadow: '0px 0px 2px 0px #061c4c',
   },
-
-
 }));
 
 export default function ButtonAppBar() {
   const classes = useStyles();
   const [dayTime, setDayTime] = useState("none");
+  const [session, loading] = useSession()
+
 
 
 
@@ -60,16 +62,6 @@ useEffect(() => {
 }, []);
 
 
-// const [red, setRed] = useState(true);
-//
-// useEffect(() => {
-//   const intervalID = setInterval(() => {
-//     setRed(red => !red);
-//     console.log(red);
-//   }, 1000);
-//
-//   return () => clearInterval(intervalID);
-// }, []);
 
   return (
     <div className={classes.root}>
@@ -78,6 +70,7 @@ useEffect(() => {
           <Typography variant="h5" className={classes.title}>
             Good {dayTime}
           </Typography>
+          {session ? (<Button onClick={signOut}>Sign Out</Button>) : (<Button onClick={signIn} >Sign In</Button>)}
         </Toolbar>
       </AppBar>
     </div>
