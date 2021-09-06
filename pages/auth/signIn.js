@@ -90,7 +90,7 @@ export default function SignIn({
         <form className={classes.root} noValidate autoComplete="off" method='post' action='/api/auth/signin/email'>
           <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
           <div>
-            <TextField className={classes.textField} fullWidth label="Email Adress*" variant="outlined" type='email' id='email' name='email' />
+            <TextField className={classes.textField} fullWidth label="Email Adress*"  type='email' id='email' name='email' />
           </div>
           <div>
           </div>

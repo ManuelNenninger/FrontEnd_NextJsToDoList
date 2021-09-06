@@ -59,33 +59,43 @@ export default function Home() {
   const [session, loading] = useSession()
 
 
-
+//------------------------
   //Initiale zuweisung der DB Daten an ListItems
   //For Development use localhost of server
   //For deployment use https://guarded-waters-13481.herokuapp.com/api/list
-  async function InitialFetch(event) {
-    const res = await fetch(`http://localhost:4747/api/list`);
-    const data = await res.json();
-    if (!data) console.log("I´m loading");
-    setlistItems(data);
-  }
+  // async function InitialFetch(event) {
+  //   const res = await fetch(`http://localhost:4747/api/list`);
+  //   const data = await res.json();
+  //   if (!data) console.log("I´m loading");
+  //   setlistItems(data);
+  // }
 
-  useEffect(() => {
-    InitialFetch();
-    }, [])
+  // useEffect(() => {
+  //   InitialFetch();
+  //   }, [])
+  //------------------------
 
 
 //Macht eine API Call um die aktuelle Session zu bekommen. Wird nicht benötigt, da Du hier auch useSession verwendest.
   useEffect(() => {
-    const fetchData = async() => {
-      const res = await fetch("/api/secret");
-      const response = await res.json();
-      if(response.content) {
-        console.log(response.content);
-        console.log(session);
-      }
+
+    const TestSession = async event => {
+      const response = await fetch(`http://localhost:4747/api/list/test`, {
+            body: JSON.stringify(
+              session
+            ),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: 'POST'
+          }
+        );
+        const res = await response.json();
+        setlistItems(res.[0].UserListItems);
     }
-    fetchData();
+
+    // fetchData();
+    TestSession();
   }, [session])
 
 
@@ -103,27 +113,51 @@ function inputHandler(event){
 //await da auf die antwort aus API gewartet werden muss, bevor JS-Code weiter fortgesetzt wird
 //For deployment use https://guarded-waters-13481.herokuapp.com/api/list/add
 const ClickHandler = async event => {
-  const response = await fetch(`http://localhost:4747/api/list/add`, {
-        body: JSON.stringify(
-          newlistItem
-        ),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      }
-    );
-    if(!response.ok) {
-      console.log("The Add Request was not sucessfull");
-    } else {
-      console.log("im here");
-      setNewListItem({"Titel": ''});
-    }
-    const res = await response.json();
+  //------------------------
+
+  // const response = await fetch(`http://localhost:4747/api/list/add`, {
+  //       body: JSON.stringify(
+  //         newlistItem
+  //       ),
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       method: 'POST'
+  //     }
+  //   );
+  //   if(!response.ok) {
+  //     console.log("The Add Request was not sucessfull");
+  //   } else {
+  //     setNewListItem({"Titel": ''});
+  //   }
+  //   const res = await response.json();
 
     //Zuweisung der nach dem Post-request aktuellsten DB Daten an ListItems
-    setlistItems(res);
+    // setlistItems(res);
+    //------------------------
+
+
+    const testresponse = await fetch(`http://localhost:4747/api/list/test/add`, {
+          body: JSON.stringify(
+            {session, newlistItem}
+          ),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
+        }
+      );
+      if(!testresponse.ok) {
+        console.log("The Add Request was not sucessfull");
+      } else {
+        setNewListItem({"Titel": ''});
+      }
+      const res = await testresponse.json();
+      //Hier wird das neue upgedatete Array uebergeben
+      setlistItems(res.UserListItems);
 }
+
+
 //Post-Request an den Server um Daten weiter an DB zu uebermitteln
 //Async Funktion, da await und fetch verwendet wird (ua Promise)
 //await da auf die antwort aus API gewartet werden muss, bevor JS-Code weiter fortgesetzt wird
@@ -131,23 +165,44 @@ const ClickHandler = async event => {
 //For deployment use https://guarded-waters-13481.herokuapp.com/api/list/delete
 const DeleteHandler = async event => {
   console.log("delete req was made");
-  const response = await fetch(`http://localhost:4747/api/list/delete`, {
-        body: JSON.stringify(
-          {id: event._id}
-        ),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      }
-    );
-    if(!response.ok) {
-      console.log("The Add Request was not sucessfull");
-    }
-    const res = await response.json();
+  console.log("The event id is: " + event._id);
+  //------------------------
 
-    //Zuweisung der nach dem Post-request aktuellsten DB Daten an ListItems
-    setlistItems(res);
+  // const response = await fetch(`http://localhost:4747/api/list/delete`, {
+  //       body: JSON.stringify(
+  //         {id: event._id}
+  //       ),
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       method: 'POST'
+  //     }
+  //   );
+  //   if(!response.ok) {
+  //     console.log("The Add Request was not sucessfull");
+  //   }
+  //   const res = await response.json();
+  //
+  //   //Zuweisung der nach dem Post-request aktuellsten DB Daten an ListItems
+  //   setlistItems(res);
+    //------------------------
+    const testresponse = await fetch(`http://localhost:4747/api/list/test/delete`, {
+          body: JSON.stringify(
+            {session, "id": event._id}
+          ),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
+        }
+      );
+      if(!testresponse.ok) {
+        console.log("The Delete Request was not sucessfull");
+        }
+      const res = await testresponse.json();
+      //Hier wird das neue upgedatete Array uebergeben
+      setlistItems(res.UserListItems);
+
 }
 
 
@@ -205,7 +260,7 @@ const handleToggle = (value) => () => {
          listItems.map((listInhalt, index) => (
            <>
            <ListItem key={index} button>
-             <ListItemText primary={listInhalt.Titel} />
+             <ListItemText primary={listInhalt.Note} />
 
            <ListItemSecondaryAction>
              <Checkbox

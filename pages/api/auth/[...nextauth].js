@@ -31,6 +31,12 @@ const options = {
   pages: {
     signIn: '/auth/signIn',
   },
+  callbacks: {
+   session: async (session, user) => {
+      session.id = user.id
+      return Promise.resolve(session)
+    }
+},
   database: "mongodb://localhost:27017/nextauthfortodolist",
 }
 export default (req, res) => NextAuth(req, res, options);
@@ -42,3 +48,6 @@ export default (req, res) => NextAuth(req, res, options);
 
 //für die Auth0 Anmeldung musst Du unter Applicaion --> settings --> Allowed Callback URLs folgendes eingeben: http://localhost:3000/api/auth/callback/auth0
 //Generell die Callbaks sollten sein: http://localhost:3000/api/auth/callback/<provider>
+
+//Über die Callback weisen wir der derzeitigen Session eine Id zu, die der User ID aus der Datenbank entspricht.
+//Wenn wir die Session bekommen, können wir die UserId aus der Session ziehen.
