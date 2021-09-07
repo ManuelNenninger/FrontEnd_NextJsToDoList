@@ -20,7 +20,7 @@ export default function NotLogedIn() {
       <div className="container ">
         <h1>
         <Link href="/">
-          <a>No session</a>
+          <a>You are not logged in...</a>
         </Link>
         </h1>
       </div>

@@ -37,7 +37,7 @@ const options = {
       return Promise.resolve(session)
     }
 },
-  database: "mongodb://localhost:27017/nextauthfortodolist",
+  database: "mongodb+srv://Manuel:ToDoListNextJs@cluster0.bvwmd.mongodb.net/NextJsToDOList?retryWrites=true&w=majority",
 }
 export default (req, res) => NextAuth(req, res, options);
 
