@@ -45,6 +45,9 @@ function Layout(props, {urlData}) {
         body {
           ${url !== undefined ? ("background-image: url(https://www.bing.com/" + url + ")") : ("background-image: url(https://www.bing.com/th?id=OHR.Tetouan_EN-US7379560261_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp%22)")};
         }
+        p, h1, h2, h3, h4, h5, h6, {
+          color: #f8f9fa;
+        }
       `}</style>
     </div>
   )

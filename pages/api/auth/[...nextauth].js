@@ -19,7 +19,7 @@ const options = {
     Providers.Email({
       server: {
         host: "smtp.sendgrid.net",
-        port: "587",
+        port: "465",
         auth: {
           user: "apikey",
           pass: "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"
