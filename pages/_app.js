@@ -6,6 +6,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import {Provider} from "next-auth/client";
+import Layout from '../src/components/Layout'
+
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -23,9 +25,11 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-          <Provider session={pageProps.session}>
-            <Component {...pageProps} />
-          </Provider>
+          <Layout>
+            <Provider session={pageProps.session}>
+              <Component {...pageProps} />
+            </Provider>
+          </Layout>
       </ThemeProvider>
     </React.Fragment>
   );

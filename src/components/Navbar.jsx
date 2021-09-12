@@ -12,18 +12,28 @@ import { signIn, signOut, useSession } from "next-auth/client"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    color: "#f8f9fa",
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
-    color: '#0A0A0A',
   },
   appbar: {
     backgroundColor: 'transparent',
-    boxShadow: '0px 0px 2px 0px #061c4c',
+    boxShadow: '0px 0px 2px 0px #f8f9fa',
   },
+  loginOutButton: {
+    color: "#f8f9fa",
+    '&:hover': {
+      background: 'rgba( 255, 255, 255, 0.2 )',
+      boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+      border: '1px solid rgba( 255, 255, 255, 0.3 )',
+      backdropFilter: 'blur( 3.5px )',
+    },
+  }
 }));
 
 export default function ButtonAppBar() {
@@ -70,7 +80,7 @@ useEffect(() => {
           <Typography variant="h5" className={classes.title}>
             Good {dayTime}
           </Typography>
-          {session ? (<Button onClick={signOut}>Sign Out</Button>) : (<Button onClick={signIn} >Sign In</Button>)}
+          {session ? (<Button className={classes.loginOutButton} onClick={signOut}>Sign Out</Button>) : (<Button className={classes.loginOutButton} onClick={signIn} >Sign In</Button>)}
         </Toolbar>
       </AppBar>
     </div>

@@ -6,6 +6,18 @@ import Navbar from "../src/components/Navbar";
 import Link from 'next/link'
 import { signIn, signOut, useSession } from "next-auth/client"
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import Avatar from '@material-ui/core/Avatar';
+import {
+  providers,
+  getSession,
+  csrfToken
+} from "next-auth/client";
 
 
 
@@ -15,25 +27,29 @@ import Button from '@material-ui/core/Button';
 //<--- Styles --->
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    minWidth: 275,
     background: 'rgba( 255, 255, 255, 0.2 )',
     boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
     borderRadius: '10px',
     border: '1px solid rgba( 255, 255, 255, 0.3 )',
     backdropFilter: 'blur( 3.5px )',
-    margin: theme.spacing(2),
-    maxHeight: '30rem',
   },
-  textFieldRoot: {
-    margin: theme.spacing(2),
+  title: {
+    display:"flex",
+    justifyContent: "center",
   },
-  saveButton: {
-    marginRight: theme.spacing(0),
+  pos: {
+    marginBottom: 12,
   },
-  overFlowContainer: {
-    overflow: 'scroll',
-  }
+  avatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginBottom: theme.spacing(2),
+  },
+  boxClass: {
+    minHeight: "100vh",
+    flexDirection: "column",
+  },
 }));
 
 //<--- Next / React Code --->
@@ -53,41 +69,78 @@ export default function Home() {
   return (
     <>
     <Navbar />
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>To Do List in Next</title>
-        <meta name="description" content="To Do List in Next" />
+        <meta name="description" content="To Do List in Next Js Sign in" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossOrigin="anonymous" />
       </Head>
-      <main >
-        <div className="container ">
-          {
-            !session && (
-            <>
-              Not signt in <br />
-              <Button className={classes.saveButton} onClick={signIn} variant="contained">Sign In</Button>
-            </>
-            )
-          }
-          {
-            session && (
-              <>
-              You are signed in as {session.user.email}
-              <h1 className="title">
-                <Link href="/HomeDashboard">
-                  <a>Go to Home Page</a>
-                </Link>
-              </h1>
-              <br />
-              <Button className={classes.saveButton} onClick={signOut} variant="contained">Sign Out</Button>
-              </>
-            )
-          }
-
-        </div>
+      <main>
+        <Box className={classes.boxClass} display="flex" justifyContent="center" alignItems="center" textAlign= "center">
+          <Card className={classes.root} >
+            <Box class={{flexDirection: "column"}} display="flex" justifyContent="center" alignItems="center" >
+              <CardContent>
+                <Box  display="flex" justifyContent="center" alignItems="center" >
+                  <Avatar className={classes.avatar}>
+                    <FormatListBulletedIcon />
+                  </Avatar>
+                </Box>
+                <Typography className={classes.title} variant="h4" component="h2"  gutterBottom>
+                  To Do List
+                </Typography>
+                <Typography className={classes.title} color="textSecondary" variant="h6" component="h2"  gutterBottom>
+                  A simple To-Do-List for your daily life.
+                </Typography>
+              </CardContent>
+              <Box>
+                <CardActions>
+                  {!session &&(
+                    <>
+                      <Button onClick={signIn} variant="contained" color="primary" >Sign in</Button>
+                    </>
+                  )}
+                  {session &&(
+                    <>
+                      <h5 className="title">
+                        <Link href="/HomeDashboard">
+                          <a>Go to your To-Do-List Page</a>
+                        </Link>
+                      </h5>
+                    </>
+                  )}
+                </CardActions>
+              </Box>
+            </Box>
+          </Card>
+        </Box>
       </main>
     </div>
     </>
   )
-}
+};
+
+//Wenn eine Session vorhanden ist, leite Ihn direkt weiter zum Dashboard. Wenn nicht, setze Session als undefiniert, etc.
+Home.getInitialProps = async (context) => {
+  const {
+    req,
+    res
+  } = context;
+  const session = await getSession({
+    req
+  });
+
+  if (session && res && session.accessToken) {
+    res.writeHead(302, {
+      Location: "/HomeDashboard",
+    });
+    res.end();
+    return;
+  }
+
+  return {
+    session: undefined,
+    providers: await providers(context),
+    csrfToken: await csrfToken(context),
+  };
+};
