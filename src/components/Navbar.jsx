@@ -6,7 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { signIn, signOut, useSession } from "next-auth/client"
+import DigitalTime from "./digitalTime/digitalTime"
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginOutButton: {
     color: "#f8f9fa",
+    border: '1px solid rgba( 255, 255, 255, 0.0 )',
     '&:hover': {
       background: 'rgba( 255, 255, 255, 0.2 )',
       boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
@@ -40,7 +44,13 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const [dayTime, setDayTime] = useState("none");
   const [session, loading] = useSession()
+  const [name, setName] = useState("");
 
+  useEffect(() =>{
+    if(session) {
+      setName(session.user.name)
+    }
+  }, []);
 
 
 
@@ -78,9 +88,16 @@ useEffect(() => {
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
           <Typography variant="h5" className={classes.title}>
-            Good {dayTime}
+            Good {dayTime} @{name}
           </Typography>
+          <MenuItem>
+            <Typography variant="h5">
+              <DigitalTime/>
+            </Typography>
+          </MenuItem>
+          <MenuItem>
           {session ? (<Button className={classes.loginOutButton} onClick={signOut}>Sign Out</Button>) : (<Button className={classes.loginOutButton} onClick={signIn} >Sign In</Button>)}
+        </MenuItem>
         </Toolbar>
       </AppBar>
     </div>

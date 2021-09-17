@@ -31,10 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     marginBottom: theme.spacing(1),
+    color: "#f8f9fa",
   },
   Typography: {
     margin: theme.spacing(1),
     alignItems: "center",
+    color: "#f8f9fa",
   },
   green: {
     color: '#fff',
@@ -56,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "24px",
     flexDirection: "column",
     display: "flex",
+    background: 'rgba( 255, 255, 255, 0.2 )',
+    boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+    borderRadius: '10px',
+    border: '1px solid rgba( 255, 255, 255, 0.3 )',
+    backdropFilter: 'blur( 3.5px )',
   },
   socialBox: {
     marginTop: theme.spacing(5),
@@ -67,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
+    signInbutton: {
+      color: "#f8f9fa",
+    },
+    upperBox: {
+      flexDirection: "column",
+    }
   }
 }));
 
@@ -79,7 +92,7 @@ export default function SignIn({
   return (
     <div className={classes.screenDiv}>
   <div className={classes.logInDiv}>
-    <Box className={classes.logInDiv}>
+    <Box className={classes.upperBox} display="flex" justifyContent="center" alignItems="center">
       <Avatar className={classes.green}>
         <FormatListBulletedIcon />
       </Avatar>
@@ -95,7 +108,7 @@ export default function SignIn({
           <div>
           </div>
           <div>
-            <Button type='submit' fullWidth variant="contained" color="primary">
+            <Button className={classes.signInbutton} type='submit' fullWidth variant="contained" color="primary">
               Sign in with Email
             </Button>
           </div>

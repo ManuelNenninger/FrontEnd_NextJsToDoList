@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../../styles/Home.module.css'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -40,8 +40,25 @@ const useStyles = makeStyles((theme) => ({
   },
   overFlowContainer: {
     overflow: 'scroll',
+  },
+  iconButton: {
+    color: 'rgba(248,249,250, 0.8)',
   }
 }));
+const CssTextField = withStyles({
+  root: {
+    '& .MuiFormLabel-root': {
+      color: 'rgba(248,249,250, 0.8)',
+    },
+    '& .MuiInputBase-root': {
+      color: '#f8f9fa',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'rgba(248,249,250, 0.8)',
+    },
+    },
+
+})(TextField);
 
 //<--- Next / React Code --->
 
@@ -101,6 +118,7 @@ function inputHandler(event){
 //await da auf die antwort aus API gewartet werden muss, bevor JS-Code weiter fortgesetzt wird
 //For deployment use https://guarded-waters-13481.herokuapp.com/api/list/add
 const ClickHandler = async event => {
+  event.preventDefault();
 
     const response = await fetch(`https://guarded-waters-13481.herokuapp.com/api/list/add`, {
           body: JSON.stringify(
@@ -182,7 +200,8 @@ const handleToggle = (value) => () => {
        <form className={classes.textFieldRoot} noValidate autoComplete="off">
          <div className="row">
            <div className="col-9 justify-content-evenly">
-             <TextField
+             <CssTextField
+
                value={newlistItem.Titel}
                fullWidth
                id="standard-basic"
@@ -194,8 +213,8 @@ const handleToggle = (value) => () => {
                onChange={inputHandler} />
            </div>
            <div className="col-1 justify-content-evenly">
-             <IconButton className={classes.saveButton} onClick={ClickHandler} aria-label="delete">
-               <AddCircleOutlineIcon fontSize="large"/>
+             <IconButton type="submit" className={classes.saveButton} onClick={ClickHandler} aria-label="delete">
+               <AddCircleOutlineIcon className={classes.iconButton} fontSize="large"/>
              </IconButton>
            </div>
        </div>
