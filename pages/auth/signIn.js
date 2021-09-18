@@ -22,6 +22,7 @@ import Box from '@material-ui/core/Box';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -29,18 +30,22 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
-  textField: {
+  signUpButton: {
     marginBottom: theme.spacing(1),
     color: "#f8f9fa",
+    fontWeight: "300",
+    background: 'rgba( 255, 255, 255, 0.2 )',
+    boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+    border: '1px solid rgba( 255, 255, 255, 0.3 )',
+    backdropFilter: 'blur( 3.5px )',
+    '&:hover': {
+      background: 'rgba( 255, 255, 255, 0.5 )',
+    },
   },
   Typography: {
     margin: theme.spacing(1),
     alignItems: "center",
     color: "#f8f9fa",
-  },
-  green: {
-    color: '#fff',
-    backgroundColor: "#8ecae6",
   },
   screenDiv: {
     justifyContent: "center",
@@ -54,8 +59,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     maxWidth: "444px",
-    paddingLeft: "24px",
-    paddingRight: "24px",
+    padding: "12px 42px",
     flexDirection: "column",
     display: "flex",
     background: 'rgba( 255, 255, 255, 0.2 )',
@@ -68,18 +72,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
     padding: "0 8px 0 8px",
     width: "100%",
-    paddingLeft: "24px",
-    paddingRight: "24px",
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch',
     },
-    signInbutton: {
-      color: "#f8f9fa",
-    },
-    upperBox: {
-      flexDirection: "column",
-    }
+  },
+  emailTextField: {
+    marginBottom: theme.spacing(1),
   }
 }));
 
@@ -92,23 +91,20 @@ export default function SignIn({
   return (
     <div className={classes.screenDiv}>
   <div className={classes.logInDiv}>
-    <Box className={classes.upperBox} display="flex" justifyContent="center" alignItems="center">
-      <Avatar className={classes.green}>
-        <FormatListBulletedIcon />
-      </Avatar>
+    <Box>
       <Typography className={classes.Typography} gutterBottom variant="h5" component="h2">
-        To Do List
+        Sign Up
       </Typography>
       <Box>
         <form className={classes.root} noValidate autoComplete="off" method='post' action='/api/auth/signin/email'>
           <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
           <div>
-            <TextField className={classes.textField} fullWidth label="Email Adress*"  type='email' id='email' name='email' />
+            <TextField className={classes.emailTextField} fullWidth label="Email Adress*"  type='email' id='email' name='email' />
           </div>
           <div>
           </div>
           <div>
-            <Button className={classes.signInbutton} type='submit' fullWidth variant="contained" color="primary">
+            <Button className={classes.signUpButton} type='submit' fullWidth variant="contained" >
               Sign in with Email
             </Button>
           </div>
@@ -122,7 +118,7 @@ export default function SignIn({
       }
       return (
       <div key={provider.name}>
-        <Button className={classes.textField} fullWidth variant="contained" color="primary" onClick={()=> signIn(provider.id)}>Sign in with {provider.name}</Button>
+        <Button className={classes.signUpButton} fullWidth variant="contained" onClick={()=> signIn(provider.id)}>Sign in with {provider.name}</Button>
       </div>
       )
       })}

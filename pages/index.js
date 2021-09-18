@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display:"flex",
     justifyContent: "center",
+    color: 'rgba(248,249,250, 0.8)',
   },
   pos: {
     marginBottom: 12,
@@ -50,6 +51,17 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
     flexDirection: "column",
   },
+  loginOutButton: {
+    color: "#f8f9fa",
+    fontWeight: "300",
+    background: 'rgba( 255, 255, 255, 0.2 )',
+    boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+    border: '1px solid rgba( 255, 255, 255, 0.3 )',
+    backdropFilter: 'blur( 3.5px )',
+    '&:hover': {
+      background: 'rgba( 255, 255, 255, 0.5 )',
+    },
+  }
 }));
 
 //<--- Next / React Code --->
@@ -61,11 +73,6 @@ export default function Home() {
   const classes = useStyles();
   const [session, loading] = useSession()
 
-
-
-
-
-
   return (
     <>
     <Navbar />
@@ -74,7 +81,6 @@ export default function Home() {
         <title>To Do List in Next</title>
         <meta name="description" content="To Do List in Next Js Sign in" />
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossOrigin="anonymous" />
       </Head>
       <main>
         <Box className={classes.boxClass} display="flex" justifyContent="center" alignItems="center" textAlign= "center">
@@ -89,15 +95,15 @@ export default function Home() {
                 <Typography className={classes.title} variant="h4" component="h2"  gutterBottom>
                   To Do List
                 </Typography>
-                <Typography className={classes.title} color="textSecondary" variant="h6" component="h2"  gutterBottom>
+                <Typography className={classes.title} variant="h6" component="h2"  gutterBottom>
                   A simple To-Do-List for your daily life.
                 </Typography>
               </CardContent>
-              <Box>
+              <Box display="flex" justifyContent="center" alignItems="center">
                 <CardActions>
                   {!session &&(
                     <>
-                      <Button onClick={signIn} variant="contained" color="primary" >Sign in</Button>
+                      <Button className={classes.loginOutButton} onClick={signIn} variant="contained" color="primary" >Sign in</Button>
                     </>
                   )}
                   {session &&(

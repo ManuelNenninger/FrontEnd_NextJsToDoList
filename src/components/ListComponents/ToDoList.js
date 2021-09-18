@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     color: 'rgba(248,249,250, 0.8)',
+  },
+  listItemText: {
+    color: 'rgba(248,249,250, 0.8)',
   }
 }));
 const CssTextField = withStyles({
@@ -224,7 +227,7 @@ const handleToggle = (value) => () => {
          listItems.map((listInhalt, index) => (
            <>
            <ListItem key={index} button>
-             <ListItemText primary={listInhalt.Note} />
+             <ListItemText className={classes.listItemText} primary={listInhalt.Note} />
            <ListItemSecondaryAction>
              <Checkbox
                edge="end"

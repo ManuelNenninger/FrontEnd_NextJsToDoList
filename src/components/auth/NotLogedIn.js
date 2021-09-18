@@ -2,6 +2,9 @@ import Head from 'next/head'
 import Navbar from "../Navbar";
 import Link from 'next/link';
 import styles from '../../../styles/Home.module.css'
+import Box from '@material-ui/core/Box';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
 
 
 
@@ -18,11 +21,16 @@ export default function NotLogedIn() {
     </Head>
     <main >
       <div className="container ">
+      <Box>
         <h1>
-        <Link href="/">
-          <a>You are not logged in...</a>
-        </Link>
+        Thanks for testing!
         </h1>
+        <h5>
+        <Link href="/">
+          <a><ArrowForwardIosIcon/>Back to Homepage.</a>
+        </Link>
+        </h5>
+        </Box>
       </div>
     </main>
   </div>

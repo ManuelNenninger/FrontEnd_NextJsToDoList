@@ -9,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { signIn, signOut, useSession } from "next-auth/client"
 import DigitalTime from "./digitalTime/digitalTime"
+import Box from '@material-ui/core/Box';
+
 
 
 
@@ -21,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
+  typography: {
     flexGrow: 1,
+    fontWeight: "300",
   },
   appbar: {
     backgroundColor: 'transparent',
@@ -30,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginOutButton: {
     color: "#f8f9fa",
+    fontWeight: "300",
     border: '1px solid rgba( 255, 255, 255, 0.0 )',
     '&:hover': {
       background: 'rgba( 255, 255, 255, 0.2 )',
@@ -37,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid rgba( 255, 255, 255, 0.3 )',
       backdropFilter: 'blur( 3.5px )',
     },
+  },
+  digitaltime: {
+    padding: theme.spacing(0.5, 2), 
+    background: 'rgba( 255, 255, 255, 0.2 )',
+    boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+    border: '1px solid rgba( 255, 255, 255, 0.3 )',
+    backdropFilter: 'blur( 3.5px )',
   }
 }));
 
@@ -87,14 +98,14 @@ useEffect(() => {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Typography variant="h5" className={classes.title}>
-            Good {dayTime} @{name}
+          <Typography variant="h5" className={classes.typography}>
+            Good {dayTime} {session ? ", @ " + name : ""}
           </Typography>
-          <MenuItem>
-            <Typography variant="h5">
+          <Box borderRadius={10} className={classes.digitaltime}>
+            <Typography variant="h5" className={classes.typography}>
               <DigitalTime/>
             </Typography>
-          </MenuItem>
+          </Box>
           <MenuItem>
           {session ? (<Button className={classes.loginOutButton} onClick={signOut}>Sign Out</Button>) : (<Button className={classes.loginOutButton} onClick={signIn} >Sign In</Button>)}
         </MenuItem>
