@@ -50,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
   boxClass: {
     minHeight: "100vh",
     flexDirection: "column",
+    display: "flex",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   loginOutButton: {
     color: "#f8f9fa",

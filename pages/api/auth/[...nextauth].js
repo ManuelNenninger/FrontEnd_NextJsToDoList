@@ -3,6 +3,10 @@ import Providers from "next-auth/providers"
 
 const options = {
   providers: [
+    Providers.Facebook({
+      clientId: "986532818803888",
+      clientSecret: "91e8625cc6eaece18556ebfb00b5c852",
+    }),
     Providers.GitHub({
       clientId: "63fa4356b4cc47464ecb",
       clientSecret: "08920c62a8cc05e49ad6e30bc981a683ab6853d4",
