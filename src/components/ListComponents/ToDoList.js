@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    background: 'rgba( 255, 255, 255, 0.2 )',
+    background: 'rgba( 0, 48, 73, 0.4 )',
     boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
     borderRadius: '10px',
     border: '1px solid rgba( 255, 255, 255, 0.3 )',
@@ -42,22 +42,22 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'scroll',
   },
   iconButton: {
-    color: 'rgba(248,249,250, 0.8)',
+    color: '#FAFAFB',
   },
   listItemText: {
-    color: 'rgba(248,249,250, 0.8)',
+    color: '#FAFAFB',
   }
 }));
 const CssTextField = withStyles({
   root: {
     '& .MuiFormLabel-root': {
-      color: 'rgba(248,249,250, 0.8)',
+      color: '#FAFAFB',
     },
     '& .MuiInputBase-root': {
-      color: '#f8f9fa',
+      color: '#FAFAFB',
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'rgba(248,249,250, 0.8)',
+      borderBottomColor: '#FAFAFB',
     },
     },
 

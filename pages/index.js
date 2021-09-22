@@ -28,7 +28,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
-    background: 'rgba( 255, 255, 255, 0.2 )',
+    background: 'rgba( 0, 48, 73, 0.4 )',
     boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
     borderRadius: '10px',
     border: '1px solid rgba( 255, 255, 255, 0.3 )',
