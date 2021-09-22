@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
   loginOutButton: {
     color: "#003049",
     fontWeight: "300",
+    fontSize: "1.2rem",
+    borderRadius: "10px",
     border: '1px solid rgba( 255, 255, 255, 0.0 )',
     '&:hover': {
       color: "#fafafb",
@@ -198,7 +200,7 @@ const renderMobileMenu = (
             </Typography>
           </Box>
           <div className={classes.sectionDesktop}>
-          <Box borderRadius={10}>
+          <Box>
               {session ? (<Button className={classes.loginOutButton} onClick={signOut}>Sign Out</Button>) : (<Button className={classes.loginOutButton} onClick={signIn} >Sign In</Button>)}
           </Box>
         </div>
