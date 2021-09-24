@@ -38,6 +38,17 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     justifyContent: "center",
     color: 'rgba(248,249,250, 0.8)',
+    [theme.breakpoints.down('xs')]: {
+    fontSize: '2rem',
+  },
+  },
+  subtitle: {
+    display:"flex",
+    justifyContent: "center",
+    color: 'rgba(248,249,250, 0.8)',
+    [theme.breakpoints.down('xs')]: {
+    fontSize: '1rem',
+  },
   },
   pos: {
     marginBottom: 12,
@@ -84,6 +95,8 @@ export default function Home() {
       <Head>
         <title>To Do List in Next</title>
         <meta name="description" content="To Do List in Next Js Sign in" />
+        <meta name="description" content="To Do List" />
+        <meta name="description" content="NextJs Projekt" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
@@ -93,13 +106,15 @@ export default function Home() {
               <CardContent>
                 <Box  display="flex" justifyContent="center" alignItems="center" >
                   <Avatar className={classes.avatar}>
-                    <FormatListBulletedIcon />
+                    <FormatListBulletedIcon 
+                    alt="To Do List Icon"
+                  />
                   </Avatar>
                 </Box>
                 <Typography className={classes.title} variant="h4" component="h2"  gutterBottom>
                   To Do List
                 </Typography>
-                <Typography className={classes.title} variant="h6" component="h2"  gutterBottom>
+                <Typography className={classes.subtitle} variant="h6" component="h2"  gutterBottom>
                   A simple To-Do-List for your daily life.
                 </Typography>
               </CardContent>
