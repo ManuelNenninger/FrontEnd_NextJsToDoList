@@ -31,25 +31,26 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     flexGrow: 1,
     fontWeight: "300",
-    color: "#003049",
+    color: "#fafafb",
     [theme.breakpoints.down('xs')]: {
     fontSize: '1.2rem',
   },
   },
   appbar: {
-    backgroundColor: 'transparent',
+    // backgroundColor: 'transparent',
     boxShadow: '0px 0px 2px 0px #f8f9fa',
+    background: 'rgba( 0, 48, 73, 0.4 )',
+    backdropFilter: 'blur( 3.5px )',
   },
   loginOutButton: {
-    color: "#003049",
+    color: "#fafafb",
     fontWeight: "300",
     fontSize: "1.2rem",
     borderRadius: "10px",
     border: '1px solid rgba( 255, 255, 255, 0.0 )',
     '&:hover': {
-      color: "#fafafb",
       background: 'rgba( 0, 48, 73, 0.4 )',
-      boxShadow: '0 8px 32px 0 rgba( 233, 196, 106, 0.1 )',
+      boxShadow: 'none',
       border: '1px solid rgba( 255, 255, 255, 0.3 )',
       backdropFilter: 'blur( 3.5px )',
     },

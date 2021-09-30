@@ -35,6 +35,9 @@ function Layout(props) {
       <style jsx global>{`
         body {
           ${url !== undefined ? ("background-image: url(https://www.bing.com/" + url + ")") : ("background-image: url(https://www.bing.com/th?id=OHR.Tetouan_EN-US7379560261_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp%22)")};
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
         }
         p, h1, h2, h3, h4, h5, h6, a{
           color: #f8f9fa;
