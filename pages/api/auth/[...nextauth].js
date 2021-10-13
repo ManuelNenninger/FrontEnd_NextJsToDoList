@@ -4,32 +4,32 @@ import Providers from "next-auth/providers"
 const options = {
   providers: [
     Providers.Facebook({
-      clientId: "986532818803888",
-      clientSecret: "91e8625cc6eaece18556ebfb00b5c852",
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
     }),
     Providers.GitHub({
-      clientId: "63fa4356b4cc47464ecb",
-      clientSecret: "08920c62a8cc05e49ad6e30bc981a683ab6853d4",
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
     Providers.Twitter({
-      clientId: "4R59Xcjam0vaHIwDdq0FmRKX5",
-      clientSecret: "OBALskqOvxcDK9f0xbZXPUmtKJA4QJcFUuLnUfVRo4WiGVw1AQ",
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
     }),
     Providers.Auth0({
-      clientId: "jjBnVOUFg9Vw13OKQpB7RjWdbDs5j67N",
-      clientSecret: "yUsd9GGv9SFlNdtzoesOl2tbY5_N9ZW1kTR44GtDMSB7CM9icEpUyClyeWHcz6Rs",
-      domain: "dev-zgd73od3.eu.auth0.com"
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      domain: process.env.AUTH0_DOMAIN,
     }),
     Providers.Email({
       server: {
-        host: "smtp.sendgrid.net",
-        port: "465",
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
         auth: {
-          user: "apikey",
-          pass: "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"
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
         }
       },
-      from: "manuel.nenninger@web.de",
+      from: process.env.EMAIL_FROM,
     }),
   ],
   pages: {
@@ -41,7 +41,7 @@ const options = {
       return Promise.resolve(session)
     }
 },
-  database: "mongodb+srv://Manuel:ToDoListNextJs@cluster0.bvwmd.mongodb.net/NextJsToDOList?retryWrites=true&w=majority",
+  database: process.env.DATABASE_URL,
 }
 export default (req, res) => NextAuth(req, res, options);
 

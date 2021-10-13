@@ -193,7 +193,7 @@ const renderMobileMenu = (
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
           <Typography variant="h5" className={classes.typography}>
-            Good {dayTime} {session ? ", @ " + name : ""}
+            Good {dayTime} {session ? ", @" + name : ""}
           </Typography>
           <Box borderRadius={10} className={classes.digitaltime}>
             <Typography variant="h5" className={classes.typography}>
